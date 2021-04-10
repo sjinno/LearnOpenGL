@@ -1,6 +1,7 @@
 use glium::{self, glutin, Surface};
 
-fn main() {
+#[allow(dead_code)]
+pub fn hello_window() {
     let event_loop = glutin::event_loop::EventLoop::new();
     let wb = glutin::window::WindowBuilder::new()
         .with_inner_size(glutin::dpi::LogicalSize::new(800.0, 600.0))

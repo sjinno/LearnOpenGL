@@ -1,19 +1,17 @@
-#[macro_use]
-extern crate glium;
+use glium::implement_vertex;
+use glium::{self, glutin, Surface};
 
-fn main() {
-    #[allow(unused_imports)]
-    use glium::{glutin, Surface};
+#[derive(Copy, Clone)]
+struct Vertex {
+    position: [f32; 3],
+}
 
+#[allow(dead_code)]
+pub fn hello_triangle() {
     let event_loop = glutin::event_loop::EventLoop::new();
     let wb = glutin::window::WindowBuilder::new();
     let cb = glutin::ContextBuilder::new();
     let display = glium::Display::new(wb, cb, &event_loop).unwrap();
-
-    #[derive(Copy, Clone)]
-    struct Vertex {
-        position: [f32; 3],
-    }
 
     implement_vertex!(Vertex, position);
 
@@ -31,23 +29,8 @@ fn main() {
     let vertex_buffer = glium::VertexBuffer::new(&display, &shape).unwrap();
     let indices = glium::index::NoIndices(glium::index::PrimitiveType::TrianglesList);
 
-    let vertex_shader_src = r#"
-        #version 330 core
-        layout (location = 0) in vec3 position;
-        
-        void main() {
-            gl_Position = vec4(position.x, position.y, position.z, 1.0);
-        }
-    "#;
-
-    let fragment_shader_src = r#"
-        #version 330 core
-        out vec4 FragColor;
-
-        void main() {
-            FragColor = vec4(1.0, 0.5, 0.2, 1.0);
-        }
-    "#;
+    let vertex_shader_src = include_str!("shaders/basic.vert.glsl");
+    let fragment_shader_src = include_str!("shaders/basic.frag.glsl");
 
     let program =
         glium::Program::from_source(&display, vertex_shader_src, fragment_shader_src, None)
