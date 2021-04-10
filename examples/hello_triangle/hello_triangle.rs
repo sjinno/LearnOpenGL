@@ -3,7 +3,7 @@ use glium::{self, glutin, Surface};
 
 #[derive(Copy, Clone)]
 struct Vertex {
-    position: [f32; 3],
+    position: [f32; 2],
 }
 
 #[allow(dead_code)]
@@ -16,13 +16,13 @@ pub fn hello_triangle() {
     implement_vertex!(Vertex, position);
 
     let vertex1 = Vertex {
-        position: [-0.5, -0.5, 0.0],
+        position: [-0.5, -0.5],
     };
     let vertex2 = Vertex {
-        position: [0.0, 0.5, 0.0],
+        position: [0.0, 0.5],
     };
     let vertex3 = Vertex {
-        position: [0.5, -0.25, 0.0],
+        position: [0.5, -0.25],
     };
     let shape = vec![vertex1, vertex2, vertex3];
 
