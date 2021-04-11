@@ -77,7 +77,7 @@ pub fn colorize_triangle() {
             std::time::Instant::now() + std::time::Duration::from_nanos(16_666_667);
         *control_flow = glutin::event_loop::ControlFlow::WaitUntil(next_frame_time);
 
-        // we update `t`
+        // We update `t`.
         t += 0.002;
         if t > 0.5 {
             t = -0.5;
