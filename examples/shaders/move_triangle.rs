@@ -30,20 +30,26 @@ pub fn move_triangle() {
     let indices = glium::index::NoIndices(glium::index::PrimitiveType::TrianglesList);
 
     let vertex_shader_src = r#"
-        #version 330 core
+        #version 140
+
         in vec2 position;
         uniform float t;
+
         void main() {
             vec2 pos = position;
+
             pos.x += t;
             pos.y += t / 1.5f;
+
             gl_Position = vec4(pos, 0.0, 1.0);
         }
     "#;
 
     let fragment_shader_src = r#"
-        #version 330 core
+        #version 140
+
         out vec4 color;
+
         void main() {
             color = vec4(0.5, 0.0, 0.0, 1.0);
         }
@@ -75,7 +81,7 @@ pub fn move_triangle() {
             std::time::Instant::now() + std::time::Duration::from_nanos(16_666_667);
         *control_flow = glutin::event_loop::ControlFlow::WaitUntil(next_frame_time);
 
-        // we update `t`
+        // We update `t`.
         t += 0.002;
         if t > 0.5 {
             t = -0.5;
